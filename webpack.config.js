@@ -21,7 +21,7 @@ module.exports = env => {
   return {
     entry,
     output: {
-      filename: 'main.js',
+      filename: 'bootstrap.min.js',
       path: outputPath
     },
     devtool: production ? 'none' : 'source-map',
@@ -85,7 +85,7 @@ module.exports = env => {
     },
     plugins: [
       new MiniCssExtractPlugin({
-        filename: 'main.css'
+        filename: 'bootstrap.min.css'
       }),
       new StyleLintPlugin(),
       new CopyWebpackPlugin([
