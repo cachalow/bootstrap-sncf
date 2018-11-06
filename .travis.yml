@@ -13,6 +13,8 @@ before_install:
 install:
   - bundle install --deployment --jobs=1
   - npm install
+  - yarn
+  - npm run dist-intern
 # Undo `_JAVA_OPTIONS` environment variable;
 # see https://github.com/travis-ci/travis-ci/issues/8408
 before_script:
@@ -24,5 +26,4 @@ cache:
 env:
   global:
     - NPM_CONFIG_PROGRESS="false"
-    - SAUCE_USERNAME="bootstrap"
 
