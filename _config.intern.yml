@@ -22,10 +22,10 @@ exclude:
 
 keep_files:
   - assets
-  - main.js
-  - main.js.map
-  - main.css
-  - main.css.map
+  - bootstrap-sncf.min.js
+  - bootstrap-sncf.min.js.map
+  - bootstrap-sncf.min.css
+  - bootstrap-sncf.min.css.map
   - vendor
 
 plugins:
