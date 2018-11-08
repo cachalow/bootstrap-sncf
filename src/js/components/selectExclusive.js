@@ -8,44 +8,46 @@ import $ from 'jquery'
 
 class SelectExclusive {
   constructor(element) {
-    this.element = element
-    this.btnNode = element.querySelector('[data-role=btn]') // arrow btn
-    this.toggleNode = element.querySelector('[data-role=select-toggle]') // menu toggle trigger
-    this.inputNode = element.querySelector('[data-role=input]') // select node
-    this.placeholderNode = element.querySelector('[data-role=placeholder]') // placeholder
-    this.menu = element.querySelector('[data-role=menu]')
-    this.defaultHiddenOption = element.querySelector('[data-role=default-hidden-option]')
-    const optionsNode = element.querySelectorAll('[data-role=value]') // options
-    this.currentValueNode = null
+    element.addEventListener('click', () => {
+      this.element = element
+      this.btnNode = element.querySelector('[data-role=btn]') // arrow btn
+      this.toggleNode = element.querySelector('[data-role=select-toggle]') // menu toggle trigger
+      this.inputNode = element.querySelector('[data-role=input]') // select node
+      this.placeholderNode = element.querySelector('[data-role=placeholder]') // placeholder
+      this.menu = element.querySelector('[data-role=menu]')
+      this.defaultHiddenOption = element.querySelector('[data-role=default-hidden-option]')
+      const optionsNode = element.querySelectorAll('[data-role=value]') // options
+      this.currentValueNode = null
 
-    this.collapses = element.querySelectorAll('[data-role=collapse]') // if collapse groups
+      this.collapses = element.querySelectorAll('[data-role=collapse]') // if collapse groups
 
-    this.addContainerNode = element.querySelector('[data-role=add]')
-    const addBtn = element.querySelector('[data-role=add-btn]')
-    this.addInput = element.querySelector('[data-role=add-input]')
+      this.addContainerNode = element.querySelector('[data-role=add]')
+      const addBtn = element.querySelector('[data-role=add-btn]')
+      this.addInput = element.querySelector('[data-role=add-input]')
 
-    this._addEventListeners() // ui event listeners
+      this._addEventListeners() // ui event listeners
 
-    optionsNode.forEach((option) => {
-      if (this.inputNode.selectedIndex === Number(option.dataset.target)) {
-        this._updatePlaceholder(option.innerHTML)
-        this._updateOption(option)
+      optionsNode.forEach((option) => {
+        if (this.inputNode.selectedIndex === Number(option.dataset.target)) {
+          this._updatePlaceholder(option.innerHTML)
+          this._updateOption(option)
+        }
+
+        option.addEventListener('click', (event) => {
+          this._onOptionChange(event)
+          this.element.classList.toggle('active')
+          this.btnNode.classList.toggle('active')
+        })
+      })
+
+      if (addBtn && this.addInput) {
+        addBtn.addEventListener('click', (event) => {
+          event.stopPropagation()
+          this._addOption(this.addInput.value)
+          this.addInput.value = ''
+        })
       }
-
-      option.addEventListener('click', (event) => {
-        this._onOptionChange(event)
-        this.element.classList.toggle('active')
-        this.btnNode.classList.toggle('active')
-      })
     })
-
-    if (addBtn && this.addInput) {
-      addBtn.addEventListener('click', (event) => {
-        event.stopPropagation()
-        this._addOption(this.addInput.value)
-        this.addInput.value = ''
-      })
-    }
   }
 
   // Private
