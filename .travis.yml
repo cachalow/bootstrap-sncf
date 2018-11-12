@@ -14,7 +14,7 @@ install:
   - bundle install --deployment --jobs=1
   - npm install
   - yarn
-  - npm run dist-intern
+  - npm run build-intern
 # Undo `_JAVA_OPTIONS` environment variable;
 # see https://github.com/travis-ci/travis-ci/issues/8408
 before_script:
