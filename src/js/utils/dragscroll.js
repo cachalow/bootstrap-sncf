@@ -79,8 +79,9 @@ function fixTouches(e) {
                                 pushed = 1;
                                 lastClientX = e.clientX;
                                 lastClientY = e.clientY;
-
-                                e.preventDefault();
+                  
+                                // Causing problems with navtabs on Chrome mobile : no side effect reporting
+                                //e.preventDefault();
                             }
                         }, 0
                     );
