@@ -15,7 +15,6 @@ class SelectExclusive {
     this.placeholderNode = element.querySelector('[data-role=placeholder]') // placeholder
     this.menu = element.querySelector('[data-role=menu]')
     this.defaultHiddenOption = element.querySelector('[data-role=default-hidden-option]')
-    const optionsNode = element.querySelectorAll('[data-role=value]') // options
     this.currentValueNode = null
 
     this.collapses = element.querySelectorAll('[data-role=collapse]') // if collapse groups
@@ -26,7 +25,10 @@ class SelectExclusive {
 
     this._addEventListeners() // ui event listeners
 
-    element.addEventListener('click', () => { // force parse options (useful when using asynchrone loading of options)
+    element.addEventListener('focusin', (masterEvent) => { // force parse options (useful when using asynchrone loading of options)
+      const optionsNode = element.querySelectorAll('[data-role=value]') // options
+      masterEvent.stopPropagation()
+
       optionsNode.forEach((option) => {
         if (this.inputNode.selectedIndex === Number(option.dataset.target)) {
           this._updatePlaceholder(option.innerHTML)
