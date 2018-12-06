@@ -61,7 +61,7 @@ class Picker {
       options.defaultDate = defaultDate
     }
 
-    flatpickr(element, {
+    element.flatpickr = flatpickr(element, {
       ...DEFAULT_OPTIONS,
       ...options,
       onOpen: () => {

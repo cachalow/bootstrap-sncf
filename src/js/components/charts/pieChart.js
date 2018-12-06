@@ -16,7 +16,7 @@ export default class PieChart {
     const values = element.dataset.values ? JSON.parse(element.dataset.values) : []
     const cutoutPercentage = element.dataset.cutoutpercentage || 0
 
-    new Chart(canvas, {
+    element.chart = new Chart(canvas, {
       type: 'pie',
       data: {
         labels,
